@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>First React Program </title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<script type="text/babel">
+
+
+class Maindata extends React.Component{
+constructor(props) {
+    super(props);
+    this.state = {name: ""};
+    
+  }
+
+change(v){
+  console.log(v.target.value);
+    this.setState({
+        name: v.target.value
+      });
+  }
+
+  render() {
+    return (
+    <div>
+      <Child2 name={this.change.bind(this)}/>
+      <Child1 name2={this.state.name}/>
+    </div>
+    );
+  }
+}
+
+
+
+class Child1 extends React.Component{
+   constructor(props) {
+    super(props);  
+  }
+  componentDidMont(){
+  console.log("mount");
+}
+  render() {
+    return (
+    <div>
+      <h1>{this.props.name2}</h1>
+          </div>
+    );
+  }
+
+}
+
+
+
+
+class Child2 extends React.Component{
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+
+handleChange(v) {
+  
+  this.props.name(v);
+  console.log("working");
+   
+}
+
+render() {
+    return (
+    <div>
+
+      <input type="text" id="t1" onChange={this.handleChange}/>
+    </div>
+    );
+  }
+}
+ReactDOM.render(
+  <Maindata/>,
+  document.getElementById('root')
+);
+</script>
+
+
+<div id="root"></div>
+
+
+</body>
+</html>
+
+
